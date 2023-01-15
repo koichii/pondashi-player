@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ポン出しプレイヤー</title>
+    </head>
+    <body>
+
+        <audio controls loop src="20 拍手効果.mp3" type="audio/mp3" id="audio11">
+        </audio>
+        <button onclick="play('audio11',0.15)">小さめ</button>
+        <button onclick="fadeout('audio11')">フェードアウト</button>
+        拍手1（繰り返し）<br />
+        <audio controls loop src="20 拍手効果.mp3" type="audio/mp3" id="audio12">
+        </audio>
+        <button onclick="play('audio12',0.4)">中くらい</button>
+        <button onclick="fadeout('audio12')">フェードアウト</button>
+        拍手2（繰り返し）<br />
+        <audio controls src="20 拍手効果.mp3" type="audio/mp3" id="audio2">
+        </audio>
+        <button onclick="play('audio2')">大きめ</button>
+        <button onclick="fadeout('audio2')">フェードアウト</button>
+        拍手3<br />
+        <audio controls src="21 ドラムロール.mp3" type="audio/mp3" id="audio3">
+        </audio>
+        <button onclick="play('audio3')">最初から</button>
+        <button onclick="fadeout('audio3')">フェードアウト</button>
+        ドラムロール<br />
+
+        <audio controls src="22 勇者は帰る.mp3" type="audio/mp3" id="audio4">
+        </audio>
+        <button onclick="play('audio4')">最初から</button>
+        <button onclick="fadeout('audio4')">フェードアウト</button>
+        勇者は帰る<br />
+
+        <audio controls loop src="24 ほたるの光.mp3" type="audio/mp3" id="audio5">
+        </audio>
+        <button onclick="play('audio5',1,15)">最初から</button>
+        <button onclick="fadeout('audio5')">フェードアウト</button>
+        ほたるの光（繰り返し）<br />
+
+        <audio controls loop src="10 曲穏やかな昼下がり.mp3" type="audio/mp3" id="audio40">
+        </audio>
+        <button onclick="play('audio40')">最初から</button>
+        <button onclick="fadeout('audio40')">フェードアウト</button>
+        ずっと穏やかな曲（繰り返し）<br />
+
+        <audio controls src="11 Long_Way.mp3" type="audio/mp3" id="audio41">
+        </audio>
+        <button onclick="play('audio41')">最初から</button>
+        <button onclick="fadeout('audio41')">フェードアウト</button>
+        穏やかで後半もりあがる曲<br />
+
+        <script>
+
+// audioの開始
+function play(id, volume=1, time=0) {
+    var audio = document.getElementById(id)
+    audio.volume = volume;
+    audio.currentTime = time;
+    audio.play();
+    if (audio.end_func) {
+        clearInterval(audio.end_func);
+        audio.end_func = null;
+    }
+}
+// audioの停止
+function fadeout(id) {
+    var audio = document.getElementById(id)
+    audio.end_func = setInterval(function() {
+        audio.volume = audio.volume - (audio.volume * 0.1);
+        if(audio.volume <= 0.01) {
+            audio.volume = 1;
+            audio.pause();
+            clearInterval(audio.end_func);
+            audio.end_func = null;
+        }
+    }, 100);
+}
+
+
+        </script>
+    </body>
+</html>
